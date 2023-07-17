@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Softnet ASN.1 Codec (Java)
-description: The Developer's Guide to Softnet ASN.1 Codec (Java)
+description: The Developer Guide to Softnet ASN.1 Codec (Java)
 baseurl: "/"
 url: "https://softnet-free.github.io/asn1codec-java"
 repository: Softnet-Free/asn1codec-java
@@ -50,7 +50,7 @@ exclude:
    - fixtures/
 
 # Set a path/url to a logo that will be displayed instead of the title
-#logo: "/assets/images/Softnet_Logo.png"
+logo: "/assets/images/logo.png"
 
 # Enable or disable the site search
 # Supports true (default) or false
@@ -112,9 +112,9 @@ aux_links_new_tab: false
 nav_sort: case_sensitive # Capital letters sorted before lowercase
 
 # External navigation links
-nav_external_links:
-  - title: This Guide on GitHub
-    url: https://github.com/Softnet-Free/asn1codec-java/tree/gh-pages
+#nav_external_links:
+#  - title: This Guide on GitHub
+#    url: https://github.com/Softnet-Free/asn1codec-java/tree/gh-pages
 
 # Footer content
 # appears at the bottom of every page's main content
