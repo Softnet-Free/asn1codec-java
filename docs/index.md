@@ -1,11 +1,11 @@
 ---
 layout: default
-title: The Developer Guide to ASN.1 Codec in Java
+title: The Developer Guide to ASN.1 Codec (Java)
 nav_order: 1
 permalink: /
 ---
 
-# The Developer Guide to Softnet ASN.1 Codec in Java
+# The Developer Guide to Softnet ASN.1 Codec (Java)
 {: .fs-7 }
 
 by Robert Koifman  
