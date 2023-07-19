@@ -229,7 +229,7 @@ If the ASN.1 syntax defines a given element as OPTIONAL, and the value to be spe
 
 ---
 #### TABLE OF CONTENTS
-* [ASNEncoder]({{ site.baseurl }}{% link docs/decoder/api/ASNEncoder.md %})
+* [ASNEncoder]({{ site.baseurl }}{% link docs/encoder/api/ASNEncoder.md %})
 * SequenceEncoder
-* [SequenceOfEncoder]({{ site.baseurl }}{% link docs/decoder/api/SequenceOfEncoder.md %})
-* [TexpEncoder]({{ site.baseurl }}{% link docs/decoder/api/TexpEncoder.md %})
+* [SequenceOfEncoder]({{ site.baseurl }}{% link docs/encoder/api/SequenceOfEncoder.md %})
+* [TexpEncoder]({{ site.baseurl }}{% link docs/encoder/api/TexpEncoder.md %})

@@ -61,6 +61,6 @@ public byte[] encodeBook(Book book) {
 ---
 #### TABLE OF CONTENTS
 * ASNEncoder
-* [SequenceEncoder]({{ site.baseurl }}{% link docs/decoder/api/SequenceEncoder.md %})
-* [SequenceOfEncoder]({{ site.baseurl }}{% link docs/decoder/api/SequenceOfEncoder.md %})
-* [TexpEncoder]({{ site.baseurl }}{% link docs/decoder/api/TexpEncoder.md %})
+* [SequenceEncoder]({{ site.baseurl }}{% link docs/encoder/api/SequenceEncoder.md %})
+* [SequenceOfEncoder]({{ site.baseurl }}{% link docs/encoder/api/SequenceOfEncoder.md %})
+* [TexpEncoder]({{ site.baseurl }}{% link docs/encoder/api/TexpEncoder.md %})

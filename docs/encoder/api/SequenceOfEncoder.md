@@ -216,7 +216,7 @@ And here’s the encoding process:
 
 ---
 #### TABLE OF CONTENTS
-* [ASNEncoder]({{ site.baseurl }}{% link docs/decoder/api/ASNEncoder.md %})
-* [SequenceEncoder]({{ site.baseurl }}{% link docs/decoder/api/SequenceEncoder.md %})
+* [ASNEncoder]({{ site.baseurl }}{% link docs/encoder/api/ASNEncoder.md %})
+* [SequenceEncoder]({{ site.baseurl }}{% link docs/encoder/api/SequenceEncoder.md %})
 * SequenceOfEncoder
-* [TexpEncoder]({{ site.baseurl }}{% link docs/decoder/api/TexpEncoder.md %})
+* [TexpEncoder]({{ site.baseurl }}{% link docs/encoder/api/TexpEncoder.md %})

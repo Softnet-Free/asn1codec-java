@@ -147,7 +147,7 @@ The Java method that encodes an instance of the ASN.1 structure, Pupil, is shown
 
 ---
 #### TABLE OF CONTENTS
-* [ASNEncoder]({{ site.baseurl }}{% link docs/decoder/api/ASNEncoder.md %})
-* [SequenceEncoder]({{ site.baseurl }}{% link docs/decoder/api/SequenceEncoder.md %})
-* [SequenceOfEncoder]({{ site.baseurl }}{% link docs/decoder/api/SequenceOfEncoder.md %})
+* [ASNEncoder]({{ site.baseurl }}{% link docs/encoder/api/ASNEncoder.md %})
+* [SequenceEncoder]({{ site.baseurl }}{% link docs/encoder/api/SequenceEncoder.md %})
+* [SequenceOfEncoder]({{ site.baseurl }}{% link docs/encoder/api/SequenceOfEncoder.md %})
 * TexpEncoder
