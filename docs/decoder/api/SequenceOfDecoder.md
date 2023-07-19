@@ -78,14 +78,14 @@ Checks if the current element in the SEQUENCE OF encoding is ASN.1 NULL. Handlin
     SequenceDecoder Sequence() throws AsnException;
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.Sequence</span> as a uniform type of the elements to decode a SEQUENCE OF SEQUENCE collection. The method creates a decoder of type <span class="datatype">SequenceDecoder</span> that allows an application to decode a nested SEQUENCE from the current position of the encoded collection of sequences and returns the decoder to the application.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
 
 - ### <span class="method">SequenceOf</span>  
 ```java
 	SequenceOfDecoder SequenceOf(UType uType)
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.Sequence</span> as a uniform type of the elements to decode a SEQUENCE OF SEQUENCE collection. The method creates a decoder for a nested SEQUENCE OF uType collection, where uType is an ASN.1 type provided as an argument on the method call.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
 
 - ### <span class="method">Int32</span>  
 ```java
@@ -94,7 +94,7 @@ This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder wa
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.Integer</span> as a uniform type of the elements to decode a SEQUENCE OF INTEGER collection. The method decodes the current element of the encoded collection as being of ASN.1 INTEGER and returns it to the application as a 32-bit Java integer. If the decoded value doesn’t fit to 32-bit integer, an exception of type <span class="exception">OverflowAsnException</span> is thrown. For example, this can happen if the value encoded in the current element was originally a 64-bit integer. As for the overload of Int32 with minValue and maxValue parameters, it allows an application to apply constraints on the value being decoded. If it doesn’t fit to the range [minValue, maxValue] inclusive, an exception of type <span class="exception">ConstraintAsnException</span> is thrown.  
 *Exceptions*:
-    - [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+    - [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
     - <span class="exception">OverflowAsnException</span>;
     - <span class="exception">ConstraintAsnException</span> can be thrown only by the <span class="method">Int32</span> overloads with minValue and maxValue constraint parameters;
 
@@ -103,14 +103,14 @@ This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder wa
     long Int64() throws AsnException;
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.Integer</span> as a uniform type of the elements to decode a SEQUENCE OF INTEGER collection. The method decodes the current element of the encoded collection as being of ASN.1 INTEGER and returns a 64-bit Java integer value to the application. If the decoded value doesn’t fit to 64-bit Java integer, an exception of type <span class="exception">OverflowAsnException</span> is thrown.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">OverflowAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">OverflowAsnException</span>;
 
 - ### <span class="method">Boolean</span>  
 ```java
     boolean Boolean() throws AsnException;
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.Boolean</span> as a uniform type of the elements to decode a SEQUENCE OF BOOLEAN collection. The method decodes the current element of the encoded collection as being of ASN.1 BOOLEAN and returns a Java boolean value to the application.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
 
 - ### <span class="method">Real32</span>  
 ```java
@@ -118,7 +118,7 @@ This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder wa
     float Real32(boolean checkForUnderflow) throws AsnException;
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.Real</span> as a uniform type of the elements to decode a SEQUENCE OF REAL collection. The method decodes the current element of the encoded collection as being of ASN.1 REAL and returns a 32-bit Java float value to the application. If the decoded value is out of range [Float.MAX_VALUE, Float.MIN_VALUE], an <span class="exception">OverflowAsnException</span> is thrown. Such can happen if the value encoded in this ASN.1 REAL element was originally a 64-bit floating point value. The other edge case is when an ASN.1 REAL element cannot be decoded as a 32-bit Java float without losing precision. If you want to detect loss of precision with throwing <span class="exception">UnderflowAsnException</span>, call the Real32 overload with true for the checkForUnderflow parameter. Losing precision can happen if the value encoded in ASN.1 REAL element was originally a 64-bit floating point value.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">OverflowAsnException</span>, <span class="exception">UnderflowAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">OverflowAsnException</span>, <span class="exception">UnderflowAsnException</span>;
 
 - ### <span class="method">Real64</span>  
 ```java
@@ -126,7 +126,7 @@ This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder wa
     double Real64(boolean checkForUnderflow) throws AsnException;
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.Real</span> as a uniform type of the elements to decode a SEQUENCE OF REAL collection. The method decodes the current element of the encoded collection as being of ASN.1 REAL and returns a 64-bit Java double to the application. If the decoded value is out of range [Double.MAX_VALUE, Double.MIN_VALUE], an <span class="exception">OverflowAsnException</span> is thrown. The other edge case is when an ASN.1 REAL element cannot be decoded as a 64-bit Java double without losing precision. If you want to detect loss of precision with throwing <span class="exception">UnderflowAsnException</span>, call the Real64 overload with true for the checkForUnderflow parameter.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">OverflowAsnException</span>, <span class="exception">UnderflowAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">OverflowAsnException</span>, <span class="exception">UnderflowAsnException</span>;
 
 - ### <span class="method">UTF8String</span>  
 ```java
@@ -135,7 +135,7 @@ This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder wa
     String UTF8String(int minLength, int maxLength) throws AsnException;
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.UTF8String</span> as a uniform type of the elements to decode a SEQUENCE OF UTF8String collection. The method decodes the current element of the encoded collection as being of ASN.1 UTF8String and returns a Java String value to the application. If an application expects a string of a specific length, it can call the method overload with the requiredLength parameter. If the length is limited to a certain range, it can call the method overload with the minLength and maxLength parameters. If the decoded value does not conform to the constraints, an exception of type <span class="exception">ConstraintAsnException</span> is thrown.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
 
 - ### <span class="method">BMPString</span>  
 ```java
@@ -144,7 +144,7 @@ This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder wa
     String BMPString(int minLength, int maxLength) throws AsnException;
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.BMPString</span> as a uniform type of the elements to decode a SEQUENCE OF BMPString collection. The method decodes the current element of the encoded collection as being of ASN.1 BMPString and returns a Java String value to the application. If an application expects a string of a specific length, it can call the method overload with the requiredLength parameter. If the length is limited to a certain range, it can call the method overload with the minLength and maxLength parameters. If the decoded value does not conform to the constraints, an exception of type <span class="exception">ConstraintAsnException</span> is thrown.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
 
 - ### <span class="method">IA5String</span>  
 ```java
@@ -153,21 +153,21 @@ This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder wa
     String IA5String(int minLength, int maxLength) throws AsnException;
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.IA5String</span> as a uniform type of the elements to decode a SEQUENCE OF IA5String collection. The method decodes the current element of the encoded collection as being of ASN.1 IA5String and returns a Java String value to the application. If an application expects a string of a specific length, it can call the method overload with the requiredLength parameter. If the length is limited to a certain range, it can call the method overload with the minLength and maxLength parameters. If the decoded value does not conform to the constraints, an exception of type <span class="exception">ConstraintAsnException</span> is thrown.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
 
 - ### <span class="method">PrintableString</span>  
 ```java
     String PrintableString() throws AsnException;
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.PrintableString</span> as a uniform type of the elements to decode a SEQUENCE OF PrintableString collection. The method decodes the current element of the encoded collection as being of ASN.1 PrintableString and returns a Java String value to the application.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
 
 - ### <span class="method">GndTimeToGC</span>  
 ```java
     java.util.GregorianCalendar GndTimeToGC() throws AsnException;
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.GeneralizedTime</span> as a uniform type of the elements to decode a SEQUENCE OF GeneralizedTime collection. The method decodes the current element of the encoded collection as being of ASN.1 GeneralizedTime and returns a <span class="datatype">GregorianCalendar</span> instance to the application.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
 
 - ### <span class="method">OctetString</span>  
 ```java
@@ -176,7 +176,7 @@ This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder wa
     byte[] OctetString(int minLength, int maxLength) throws AsnException;
 ```
 This method is allowed to call if the SEQUENCE OF &lt;ElementType&gt; decoder was created by specifying <span class="datatype">UType.OctetString</span> as a uniform type of the elements to decode a SEQUENCE OF OctetString collection. The method decodes the current element of the encoded collection as being of ASN.1 OctetString and returns a Java byte array to the application. If an application expects a byte array of a specific length, it can call the method overload with the requiredLength parameter. If the length is limited to a certain range, it can call the method overload with the minLength and maxLength parameters. If the decoded byte array does not conform to the constraints, an exception of type <span class="exception">ConstraintAsnException</span> is thrown.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>.
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>.
 
 ### <span class="subsection">A use case for the SequenceOfDecoder interface:</span>
 
@@ -207,3 +207,10 @@ public ArrayList<Integer> decodeList(byte[] encoding) throws AsnException
     return integerList;
 }
 ```
+
+---
+#### TABLE OF CONTENTS
+* [ASNDecoder]({{ site.baseurl }}{% link docs/decoder/api/ASNDecoder.md %})
+* [SequenceDecoder]({{ site.baseurl }}{% link docs/decoder/api/SequenceDecoder.md %})
+* SequenceOfDecoder
+* [TexpDecoder]({{ site.baseurl }}{% link docs/decoder/api/TexpDecoder.md %})

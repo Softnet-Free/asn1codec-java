@@ -213,7 +213,7 @@ Sets the tag class validation parameter of the SEQUENCE decoder to true or false
     TexpDecoder Texp(TagClass tc) throws AsnException;
 ```
 The method creates a decoder of type <span class="datatype">TexpDecoder</span> that provides an API to decode the current element of an encoded SEQUENCE if it is an explicitly tagged element. The <span class="datatype">TexpDecoder</span> interface is described in section 4.4. If the tag class validation is not used, the method without the "tc" parameter is used to create a decoder, whatever the tag class of the explicitly tagged element is. Otherwise, if the tag class validation is used, the first overload of the method validates when creating the decoder that the element's tag class is ContextSpecific. As for other tag classes, the second overload of the method allows an application to specify any of the classes from <span class="datatype">TagClass</span> in the "tc" parameter.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
 
 - ### <span class="method">Sequence</span>  
 ```java
@@ -221,7 +221,7 @@ The method creates a decoder of type <span class="datatype">TexpDecoder</span> t
     SequenceDecoder Sequence(TagClass tc) throws AsnException;
 ```
 Creates a SEQUENCE decoder of type <span class="datatype">SequenceDecoder</span> that allows an application to decode a nested SEQUENCE from the current position of an encoded SEQUENCE and returns the decoder to the application.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
 
 - ### <span class="method">SequenceOf</span>  
 ```java
@@ -229,7 +229,7 @@ Creates a SEQUENCE decoder of type <span class="datatype">SequenceDecoder</span>
     SequenceOfDecoder SequenceOf(UType uType, TagClass tc) throws AsnException;
 ```
 Creates a SEQUENCE OF decoder of type <span class="datatype">SequenceOfDecoder</span> that allows an application to decode a nested SEQUENCE OF from the current position of an encoded SEQUENCE and returns the decoder to the application.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
 
 - ### <span class="method">Int32</span>  
 ```java
@@ -241,7 +241,7 @@ Creates a SEQUENCE OF decoder of type <span class="datatype">SequenceOfDecoder</
 ```
 Decodes the current element of an encoded SEQUENCE as being of ASN.1 INTEGER and returns a 32-bit Java integer value to the application. If the decoded value doesn’t fit to 32-bit Java integer, an exception of type <span class="exception">OverflowAsnException</span> is thrown. As for the overloads of Int32 with minValue and maxValue parameters, they allow an application to apply constraints on the value being decoded. If it doesn’t fit to the range [minValue, maxValue] inclusive, <span class="exception">ConstraintAsnException</span> is thrown.  
 *Exceptions*:
-    - [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+    - [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
     - <span class="exception">OverflowAsnException</span>;
     - <span class="exception">ConstraintAsnException</span> can be thrown only by the <span class="method">Int32</span> overloads with minValue and maxValue constraint parameters;
 
@@ -251,7 +251,7 @@ Decodes the current element of an encoded SEQUENCE as being of ASN.1 INTEGER and
     long Int64(TagClass tc) throws AsnException;
 ```
 Decodes the current element of an encoded SEQUENCE as being of ASN.1 INTEGER and returns a 64-bit Java integer value to the application. If the decoded value doesn’t fit to 64-bit Java integer, an exception of type OverflowAsnException is thrown.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">OverflowAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">OverflowAsnException</span>;
 
 - ### <span class="method">Boolean</span>  
 ```java
@@ -259,7 +259,7 @@ Decodes the current element of an encoded SEQUENCE as being of ASN.1 INTEGER and
     boolean Boolean(TagClass tc) throws AsnException;
 ```
 Decodes the current element of an encoded SEQUENCE as being of ASN.1 BOOLEAN and returns a Java boolean value to the application.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
 
 - ### <span class="method">Real32</span>  
 ```java
@@ -271,7 +271,7 @@ Decodes the current element of an encoded SEQUENCE as being of ASN.1 BOOLEAN and
 ```
 Decodes the current element of an encoded SEQUENCE as being of ASN.1 REAL and returns a 32-bit Java float value to the application. If the decoded value is greater than 32-bit Java float can represent, an exception of type <span class="exception">OverflowAsnException</span> is thrown. Such can happen if the value encoded in this ASN.1 REAL element was originally a 64-bit floating point value. The other edge case is when an ASN.1 REAL element cannot be decoded as a 32-bit Java float without losing precision. If you want to detect loss of precision with throwing <span class="exception">UnderflowAsnException</span>, call the Real32 overload with true for the checkForUnderflow parameter. Losing precision can happen if the value encoded in ASN.1 REAL element was originally a 64-bit floating point value.  
 *Exceptions*:
-    - [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+    - [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
     - <span class="exception">OverflowAsnException</span>;
     - <span class="exception">UnderflowAsnException</span>;
 
@@ -285,7 +285,7 @@ Decodes the current element of an encoded SEQUENCE as being of ASN.1 REAL and re
 ```
 Decodes the current element of an encoded SEQUENCE as being of ASN.1 REAL and returns a 64-bit Java double value to the application. If the decoded value is greater than 64-bit Java double can represent, an exception of type <span class="exception">OverflowAsnException</span> is thrown. The other edge case is when an ASN.1 REAL element cannot be decoded as a 64-bit Java double without losing precision. If you want to detect loss of precision with throwing <span class="exception">UnderflowAsnException</span>, call the Real64 overload with true for the checkForUnderflow parameter.  
 *Exceptions*:
-    - [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+    - [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
     - <span class="exception">OverflowAsnException</span>;
     - <span class="exception">UnderflowAsnException</span>;
 
@@ -301,7 +301,7 @@ Decodes the current element of an encoded SEQUENCE as being of ASN.1 REAL and re
     String UTF8String(int minLength, int maxLength, TagClass tc) throws AsnException;
 ```
 Decodes the current element of an encoded SEQUENCE as being of ASN.1 UTF8String and returns a Java String value to the application. If an application expects a string of a specific length, it can call the method overload with the requiredLength parameter. If the length is limited to a certain range, it can call the method overload with the minLength and maxLength parameters. If the decoded value does not conform to the constraints, an exception of type ConstraintAsnException is thrown.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
 
 - ### <span class="method">BMPString</span>  
 ```java
@@ -315,7 +315,7 @@ Decodes the current element of an encoded SEQUENCE as being of ASN.1 UTF8String 
     String BMPString(int minLength, int maxLength, TagClass tc) throws AsnException;
 ```
 Decodes the current element of an encoded SEQUENCE as being of ASN.1 BMPString and returns a Java String value to the application. If an application expects a string of a specific length, it can call the method overload with the requiredLength parameter. If the length is limited to a certain range, it can call the method overload with the minLength and maxLength parameters. If the decoded value does not conform to the constraints, an exception of type ConstraintAsnException is thrown.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
 
 - ### <span class="method">IA5String</span>  
 ```java
@@ -329,7 +329,7 @@ Decodes the current element of an encoded SEQUENCE as being of ASN.1 BMPString a
     String IA5String(int minLength, int maxLength, TagClass tc) throws AsnException;
 ```
 Decodes the current element of the encoded SEQUENCE as being of ASN.1 IA5String and returns a Java String value to the application. If an application expects a string of a specific length, it can call the method overload with the requiredLength parameter. If the length is limited to a certain range, it can call the method overload with the minLength and maxLength parameters. If the decoded value does not conform to the constraints, an exception of type ConstraintAsnException is thrown.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
 
 - ### <span class="method">PrintableString</span>  
 ```java
@@ -337,7 +337,7 @@ Decodes the current element of the encoded SEQUENCE as being of ASN.1 IA5String 
     String PrintableString(TagClass tc) throws AsnException;
 ```
 Decodes the current element of the encoded SEQUENCE as being of ASN.1 PrintableString and returns a Java String value to the application.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
 
 - ### <span class="method">GndTimeToGC</span>  
 ```java
@@ -345,7 +345,7 @@ Decodes the current element of the encoded SEQUENCE as being of ASN.1 PrintableS
     java.util.GregorianCalendar GndTimeToGC(TagClass tc) throws AsnException;
 ```
 Decodes the current element of the encoded SEQUENCE as being of ASN.1 GeneralizedTime and returns a <span class="datatype">GregorianCalendar</span> instance to the application.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions);
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions);
 
 - ### <span class="method">OctetString</span>  
 ```java
@@ -359,7 +359,7 @@ Decodes the current element of the encoded SEQUENCE as being of ASN.1 Generalize
     byte[] OctetString(int minLength, int maxLength, TagClass tc) throws AsnException;
 ```
 Decodes the current element of the encoded SEQUENCE as being of ASN.1 OctetString and returns a Java byte array to the application. If an application expects a byte array of a specific length, it can call the method overload with the requiredLength parameter. If the length is limited to a certain range, it can call the method overload with the minLength and maxLength parameters. If the decoded byte array does not conform to the constraints, an exception of type ConstraintAsnException is thrown.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
 
 - ### <span class="method">OctetStringToUUID</span>  
 ```java
@@ -367,7 +367,7 @@ Decodes the current element of the encoded SEQUENCE as being of ASN.1 OctetStrin
     java.util.UUID OctetStringToUUID(TagClass tc) throws AsnException;
 ```
 Decodes the current element of the encoded SEQUENCE as being of ASN.1 OctetString and expects it to be 16 bytes long. If so, the method converts it to an instance of java.util.UUID, and returns it to the application. If the length of the decoded byte array is not 16 bytes, an exception of type ConstraintAsnException is thrown.  
-*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/decoder.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
+*Exceptions*: [Standard Exceptions]({{ site.baseurl }}{% link docs/decoder/index.md %}#standard-exceptions), <span class="exception">ConstraintAsnException</span>;
 
 ### <span class="subsection">A use case for the SequenceDecoder interface:</span>
 
@@ -433,3 +433,10 @@ The following Java code demonstrates the process of decoding a UserProfile insta
         return user;
     }
 ```
+
+---
+#### TABLE OF CONTENTS
+* [ASNDecoder]({{ site.baseurl }}{% link docs/decoder/api/ASNDecoder.md %})
+* SequenceDecoder
+* [SequenceOfDecoder]({{ site.baseurl }}{% link docs/decoder/api/SequenceOfDecoder.md %})
+* [TexpDecoder]({{ site.baseurl }}{% link docs/decoder/api/TexpDecoder.md %})

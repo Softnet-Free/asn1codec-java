@@ -51,3 +51,10 @@ Here’s the Java code that decodes an ASN.1 DER encoded instance of the Book st
         return book;
     }	
 ```
+
+---
+#### TABLE OF CONTENTS
+* ASNDecoder
+* [SequenceDecoder]({{ site.baseurl }}{% link docs/decoder/api/SequenceDecoder.md %})
+* [SequenceOfDecoder]({{ site.baseurl }}{% link docs/decoder/api/SequenceOfDecoder.md %})
+* [TexpDecoder]({{ site.baseurl }}{% link docs/decoder/api/TexpDecoder.md %})
