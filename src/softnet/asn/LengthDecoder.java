@@ -15,20 +15,18 @@
 *	
 *	You should have received a copy of the GNU General Public License
 *	along with Softnet ASN.1 Codec (Java). If not, see <https://www.gnu.org/licenses/>.
-*
-*	-----------------------------------------------------------------------------------
-*	The developer's guide to Softnet ASN.1 Codec (Java) is published at 
-*	https://robert-koifman.github.io/asncodec-java/.
-*
-*	You can find use cases, Q&A, articles, and discussions about this project at 
-*	https://github.com/robert-koifman/asncodec-java/discussions.
 */
 
 package softnet.asn;
 
 class LengthDecoder
 {
-    public static PairInt32 decode(byte[] buffer, int offset) throws FormatAsnException
+    public static PairInt32 decode2(byte[] buffer, int offset) throws FormatAsnException
+    {
+    	return null;
+    }
+    
+    public static void decode(byte[] buffer, int offset, PairInt32 result) throws FormatAsnException
     {
     	try
     	{    	
@@ -36,7 +34,9 @@ class LengthDecoder
 	
 	        if (L1_Byte <= 127)
 	        {
-	            return new PairInt32(L1_Byte, 1);
+	        	result.first = L1_Byte;
+	        	result.second = 1;
+	        	return;
 	        }
 	
 	        if (L1_Byte == 128)
@@ -48,14 +48,18 @@ class LengthDecoder
 	        if (L_Size == 1)
 	        {
 	            int length = buffer[offset] & 0xFF;
-	            return new PairInt32(length, 2);
+	            result.first = length;
+	        	result.second = 2;
+	        	return;
 	        }
 	        else if (L_Size == 2)
 	        {
 	            int b1 = buffer[offset] & 0xFF;
 	            int b0 = buffer[offset + 1] & 0xFF;
 	            int length = (b1 << 8) | b0;
-	            return new PairInt32(length, 3);
+	            result.first = length;
+	        	result.second = 3;
+	        	return;
 	        }
 	        else if (L_Size == 3)
 	        {
@@ -63,7 +67,9 @@ class LengthDecoder
 	            int b1 = buffer[offset + 1] & 0xFF;
 	            int b0 = buffer[offset + 2] & 0xFF;
 	            int length = (b2 << 16) | (b1 << 8) | b0;
-	            return new PairInt32(length, 4);
+	            result.first = length;
+	        	result.second = 4;
+	        	return;
 	        }
 	        else if (L_Size == 4)
 	        {
@@ -75,7 +81,9 @@ class LengthDecoder
 	            int b1 = buffer[offset + 2] & 0xFF;
 	            int b0 = buffer[offset + 3] & 0xFF;
 	            int length = (b3 << 24) | (b2 << 16) | (b1 << 8) | b0;
-	            return new PairInt32(length, 5);
+	            result.first = length;
+	        	result.second = 5;
+	        	return;
 	        }
 	
 	        throw new FormatAsnException("ASN1 codec does not support the length of content more than 2GB.");

@@ -15,25 +15,24 @@
 *	
 *	You should have received a copy of the GNU General Public License
 *	along with Softnet ASN.1 Codec (Java). If not, see <https://www.gnu.org/licenses/>.
-*
-*	-----------------------------------------------------------------------------------
-*	The developer's guide to Softnet ASN.1 Codec (Java) is published at 
-*	https://robert-koifman.github.io/asncodec-java/.
-*
-*	You can find use cases, Q&A, articles, and discussions about this project at 
-*	https://github.com/robert-koifman/asncodec-java/discussions.
 */
 
 package softnet.asn;
 
 class PairInt32
 {
-	public final int first;
-	public final int second;
+	public int first;
+	public int second;
 	
 	public PairInt32(int first, int second)
 	{
 		this.first = first;
 		this.second = second;
+	}
+	
+	public PairInt32()
+	{
+		first = 0;
+		second = 0;
 	}
 }

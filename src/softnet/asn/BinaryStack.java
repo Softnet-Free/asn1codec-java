@@ -15,13 +15,6 @@
 *	
 *	You should have received a copy of the GNU General Public License
 *	along with Softnet ASN.1 Codec (Java). If not, see <https://www.gnu.org/licenses/>.
-*
-*	-----------------------------------------------------------------------------------
-*	The developer's guide to Softnet ASN.1 Codec (Java) is published at 
-*	https://softnet-free.github.io/asn1codec-java/.
-*
-*	You can find use cases, Q&A, articles, and discussions about this project at 
-*	https://github.com/robert-koifman/asncodec-java/discussions.
 */
 
 package softnet.asn;

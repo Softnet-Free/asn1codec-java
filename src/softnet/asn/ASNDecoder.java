@@ -15,13 +15,6 @@
 *	
 *	You should have received a copy of the GNU General Public License
 *	along with Softnet ASN.1 Codec (Java). If not, see <https://www.gnu.org/licenses/>.
-*
-*	-----------------------------------------------------------------------------------
-*	The developer guide to Softnet ASN.1 Codec (Java) is published at 
-*	https://softnet-free.github.io/asn1codec-java/
-*
-*	Use cases, Q&A, articles, and discussions about this project are published at 
-*	https://github.com/softnet-free/asn1codec-java/discussions.
 */
 
 package softnet.asn;
@@ -51,13 +44,14 @@ public class ASNDecoder
                 throw new TypeMismatchAsnException();
 
             offset++;
-            PairInt32 lengthPair = LengthDecoder.decode(encoding, offset);
-            offset += lengthPair.second;
+            PairInt32 lengthResult = new PairInt32();
+            LengthDecoder.decode(encoding, offset, lengthResult);
+            offset += lengthResult.second;
 
-            if (offset + lengthPair.first > encoding.length)
+            if (offset + lengthResult.first > encoding.length)
                 throw new FormatAsnException("The size of the input buffer is not enough to contain all the ASN.1 data.");
 
-            return new SequenceDecoderImp(encoding, offset, lengthPair.first, false); 
+            return new SequenceDecoderImp(encoding, offset, lengthResult.first, false); 
         }
         catch (java.lang.ArrayIndexOutOfBoundsException e)
         {
