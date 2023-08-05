@@ -48,31 +48,18 @@ public class ASNEncoder
         BinaryStack binStack = new BinaryStack();
         binStack.allocate(estimatedSize);
         sequence.encodeTLV(binStack);
-        
-        if(binStack.position() == 0)
-        	return binStack.buffer();
-
-        byte[] trimmedBuffer = new byte[binStack.count()];
-        System.arraycopy(binStack.buffer(), binStack.position(), trimmedBuffer, 0, binStack.count());
-        return trimmedBuffer;
+      	return binStack.buffer();
     }
 
     public byte[] getEncoding(int prefixSize)
     {
         if (prefixSize < 0)
             throw new IllegalArgumentException("'prefixSize' must not be negative.");
-
         int estimatedSize = sequence.estimateSize();
         BinaryStack binStack = new BinaryStack();
         binStack.allocate(prefixSize + estimatedSize);
         sequence.encodeTLV(binStack);
-        
-        if(binStack.position() == prefixSize)
-        	return binStack.buffer();
-                
-        byte[] trimmedBuffer = new byte[prefixSize + binStack.count()];
-        System.arraycopy(binStack.buffer(), binStack.position(), trimmedBuffer, prefixSize, binStack.count());
-        return trimmedBuffer;
+       	return binStack.buffer();
     }	
 }
 

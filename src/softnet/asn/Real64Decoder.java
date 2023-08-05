@@ -89,19 +89,9 @@ class Real64Decoder
             exponent_bytes_number = 2;
 
             if (byte_a >= 128)
-            {
-                if (byte_a == 255 && byte_b >= 128)
-                    throw new FormatAsnException();
-
                 exponent = /* 0xFFFF0000 */ -65536 | (byte_a << 8) | byte_b;
-            }
             else
-            {
-                if (byte_a == 0 && byte_b <= 127)
-                    throw new FormatAsnException();
-
                 exponent = (byte_a << 8) | byte_b;
-            }
         }
         else if (exponent_flags == 2)
         {
@@ -221,16 +211,16 @@ class Real64Decoder
             		mantissa = mantissa >> shift;
             	}
             }
-            else // mantissa_width >= 53
+            else // mantissa_width == 53
             {
                 if (checkForUnderflow)
                     throw new UnderflowAsnException("The precision of the input real is outside of the scope of 64-bit IEEE-754 real.");
-            	mantissa = mantissa >> (-(int)exponent + 1);  
+            	mantissa = mantissa >> (-(int)exponent + 1);
             }
             
             doubleBits = doubleBits | mantissa;
             
-            return Double.longBitsToDouble(doubleBits); 
-        }        
+            return Double.longBitsToDouble(doubleBits);
+        }
 	}
 }

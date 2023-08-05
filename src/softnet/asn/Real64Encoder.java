@@ -71,11 +71,8 @@ class Real64Encoder implements ElementEncoder
 
     private void encodeV(double value)
     {
-    	long doubleBits = Double.doubleToLongBits(value);
-    	    	
-        int exp_byte_a = ((int)(doubleBits >> 56)) & 0x0000007F;
-        int exp_byte_b = ((int)(doubleBits >> 48)) & 0x000000F0;
-        int exponent = ((exp_byte_a << 4) | (exp_byte_b >> 4));
+    	long doubleBits = Double.doubleToLongBits(value);    	    	
+        int exponent = (int)((doubleBits & 0x7ff0000000000000L) >> 52);
     	
         if (exponent >= 1) // normal double / +infinity / -infinity / NaN
         {
@@ -166,63 +163,63 @@ class Real64Encoder implements ElementEncoder
                         {
                             if (b1 == 0)
                             {
-                               	V_bytes[V_length] = (byte)b0;
+                               	V_bytes[V_length] = b0;
                                 V_length += 1;
                             }
                             else
                             {
-                               	V_bytes[V_length] = (byte)b1;
-                               	V_bytes[V_length + 1] = (byte)b0;
+                               	V_bytes[V_length] = b1;
+                               	V_bytes[V_length + 1] = b0;
                                 V_length += 2;
                             }
                         }
                         else
                         {
-                           	V_bytes[V_length] = (byte)b2;
-                           	V_bytes[V_length + 1] = (byte)b1;
-                           	V_bytes[V_length + 2] = (byte)b0;
+                           	V_bytes[V_length] = b2;
+                           	V_bytes[V_length + 1] = b1;
+                           	V_bytes[V_length + 2] = b0;
                             V_length += 3;
                         }
                     }
                     else
                     {
-                       	V_bytes[V_length] = (byte)b3;
-                       	V_bytes[V_length + 1] = (byte)b2;
-                       	V_bytes[V_length + 2] = (byte)b1;
-                       	V_bytes[V_length + 3] = (byte)b0;
+                       	V_bytes[V_length] = b3;
+                       	V_bytes[V_length + 1] = b2;
+                       	V_bytes[V_length + 2] = b1;
+                       	V_bytes[V_length + 3] = b0;
                         V_length += 4;
                     }
                 }
                 else
                 {
-                   	V_bytes[V_length] = (byte)b4;
-                   	V_bytes[V_length + 1] = (byte)b3;
-                   	V_bytes[V_length + 2] = (byte)b2;
-                   	V_bytes[V_length + 3] = (byte)b1;
-                   	V_bytes[V_length + 4] = (byte)b0;
+                   	V_bytes[V_length] = b4;
+                   	V_bytes[V_length + 1] = b3;
+                   	V_bytes[V_length + 2] = b2;
+                   	V_bytes[V_length + 3] = b1;
+                   	V_bytes[V_length + 4] = b0;
                     V_length += 5;
                 }
             }
             else
             {
-               	V_bytes[V_length] = (byte)b5;
-               	V_bytes[V_length + 1] = (byte)b4;
-               	V_bytes[V_length + 2] = (byte)b3;
-               	V_bytes[V_length + 3] = (byte)b2;
-               	V_bytes[V_length + 4] = (byte)b1;
-               	V_bytes[V_length + 5] = (byte)b0;
+               	V_bytes[V_length] = b5;
+               	V_bytes[V_length + 1] = b4;
+               	V_bytes[V_length + 2] = b3;
+               	V_bytes[V_length + 3] = b2;
+               	V_bytes[V_length + 4] = b1;
+               	V_bytes[V_length + 5] = b0;
                 V_length += 6;
             }
         }
         else
         {
-           	V_bytes[V_length] = (byte)b6;
-           	V_bytes[V_length + 1] = (byte)b5;
-           	V_bytes[V_length + 2] = (byte)b4;
-           	V_bytes[V_length + 3] = (byte)b3;
-           	V_bytes[V_length + 4] = (byte)b2;
-           	V_bytes[V_length + 5] = (byte)b1;
-           	V_bytes[V_length + 6] = (byte)b0;
+           	V_bytes[V_length] = b6;
+           	V_bytes[V_length + 1] = b5;
+           	V_bytes[V_length + 2] = b4;
+           	V_bytes[V_length + 3] = b3;
+           	V_bytes[V_length + 4] = b2;
+           	V_bytes[V_length + 5] = b1;
+           	V_bytes[V_length + 6] = b0;
             V_length += 7;
         }        
     }
