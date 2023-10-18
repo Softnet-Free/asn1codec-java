@@ -452,6 +452,31 @@ class SequenceOfDecoderImp implements SequenceOfDecoder
     	throw new FormatAsnException();
     }
 
+    public java.util.Date GndTimeToDate() throws FormatAsnException, EndOfContainerAsnException, TypeMismatchAsnException
+    {
+    	validateState(UType.GeneralizedTime);
+
+        if (m_offset == data_end)
+            throw new EndOfContainerAsnException();
+
+        int T = m_buffer[m_offset];
+        int tagClass = T & C_Mask_Class;
+        
+        if (tagClass == C_Universal_Class)
+        {
+            if ((T & C_Constructed_Flag) != 0 || (T & C_Mask_Tag) != UniversalTag.GeneralizedTime)
+                throw new TypeMismatchAsnException();
+
+            int V_Length = decodeLength();
+            java.util.Date value = GndTimeToDateDecoder.decode(m_buffer, m_offset, V_Length); 
+            m_offset += V_Length;
+
+            return value;
+        }
+
+    	throw new FormatAsnException();
+    }
+    
     public GregorianCalendar GndTimeToGC() throws FormatAsnException, EndOfContainerAsnException, TypeMismatchAsnException
     {
     	validateState(UType.GeneralizedTime);
@@ -468,7 +493,7 @@ class SequenceOfDecoderImp implements SequenceOfDecoder
                 throw new TypeMismatchAsnException();
 
             int V_Length = decodeLength();
-            GregorianCalendar value = GndTimeGCDecoder.decode(m_buffer, m_offset, V_Length); 
+            GregorianCalendar value = GndTimeToGCDecoder.decode(m_buffer, m_offset, V_Length); 
             m_offset += V_Length;
 
             return value;

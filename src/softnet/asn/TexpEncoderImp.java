@@ -16,8 +16,6 @@
 
 package softnet.asn;
 
-import java.util.GregorianCalendar;
-
 public class TexpEncoderImp implements TexpEncoder, ElementEncoder
 {
 	private static int C_ContextSpecific_Constructed = 0xA0;
@@ -161,11 +159,16 @@ public class TexpEncoderImp implements TexpEncoder, ElementEncoder
 		encoder = PrintableStringEncoder.create(value);	
 	}
 
+	public void GndTime(java.util.Date value) 
+	{
+		validateStateAndValue(value);
+		encoder = DateToGndTimeEncoder.create(value);
+	}
+	
 	public void GndTime(java.util.GregorianCalendar value) 
 	{
 		validateStateAndValue(value);
-		GregorianCalendar valueClone = (GregorianCalendar)value.clone();
-		encoder = GndTimeGCEncoder.create(valueClone);
+		encoder = GCToGndTimeEncoder.create(value);
 	}
 
 	public void OctetString(byte[] buffer)
@@ -356,18 +359,28 @@ public class TexpEncoderImp implements TexpEncoder, ElementEncoder
 		encoder = new TimpEncoder(tag, tc, PrintableStringEncoder.create(value));
 	}		
 
+	public void GndTime(int tag, java.util.Date value)
+	{
+		validateStateAndValue(value);
+		encoder = new TimpEncoder(tag, DateToGndTimeEncoder.create(value));
+	}
+
+	public void GndTime(int tag, java.util.Date value, TagClass tc)
+	{
+		validateStateAndValue(value);
+		encoder = new TimpEncoder(tag, tc, DateToGndTimeEncoder.create(value));
+	}
+
 	public void GndTime(int tag, java.util.GregorianCalendar value)
 	{
 		validateStateAndValue(value);
-		GregorianCalendar valueClone = (GregorianCalendar)value.clone();
-		encoder = new TimpEncoder(tag, GndTimeGCEncoder.create(valueClone));
+		encoder = new TimpEncoder(tag, GCToGndTimeEncoder.create(value));
 	}
 
 	public void GndTime(int tag, java.util.GregorianCalendar value, TagClass tc)
 	{
 		validateStateAndValue(value);
-		GregorianCalendar valueClone = (GregorianCalendar)value.clone();
-		encoder = new TimpEncoder(tag, tc, GndTimeGCEncoder.create(valueClone));
+		encoder = new TimpEncoder(tag, tc, GCToGndTimeEncoder.create(value));
 	}
 
 	public void OctetString(int tag, byte[] buffer)

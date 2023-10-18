@@ -70,6 +70,9 @@ public interface TexpDecoder {
 	String PrintableString() throws AsnException;
 	String PrintableString(TagClass tc) throws AsnException;
 
+    java.util.Date GndTimeToDate() throws AsnException;
+    java.util.Date GndTimeToDate(TagClass tc) throws AsnException;
+
 	java.util.GregorianCalendar GndTimeToGC() throws AsnException;
 	java.util.GregorianCalendar GndTimeToGC(TagClass tc) throws AsnException;
 

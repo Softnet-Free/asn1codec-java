@@ -31,6 +31,7 @@ public interface SequenceOfEncoder{
 	void BMPString(String value);
 	void IA5String(String value);
 	void PrintableString(String value);
+	void GndTime(java.util.Date value);
 	void GndTime(java.util.GregorianCalendar value);
 	void OctetString(byte[] buffer);
 	void OctetString(byte[] buffer, int offset, int length);

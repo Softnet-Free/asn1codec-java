@@ -20,20 +20,20 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-class GndTimeGCEncoder implements ElementEncoder
+class GCToGndTimeEncoder implements ElementEncoder
 {
 	private byte[] V_bytes;
 	private int V_length;
 	
-    private GndTimeGCEncoder()
+    private GCToGndTimeEncoder()
     {
     	V_bytes = new byte[19];
     	V_length = 0;
     }
 
-    public static GndTimeGCEncoder create(GregorianCalendar value)
+    public static GCToGndTimeEncoder create(GregorianCalendar value)
     {
-    	GndTimeGCEncoder encoder = new GndTimeGCEncoder();
+    	GCToGndTimeEncoder encoder = new GCToGndTimeEncoder();
         encoder.encodeV(value);
         return encoder;
     }
@@ -63,6 +63,7 @@ class GndTimeGCEncoder implements ElementEncoder
 	
 	private void encodeV(GregorianCalendar value)
 	{
+		TimeZone origTimeZone = value.getTimeZone(); 
 		value.setTimeZone(TimeZone.getTimeZone("UTC"));
 				
 		int year = value.get(Calendar.YEAR);
@@ -72,6 +73,7 @@ class GndTimeGCEncoder implements ElementEncoder
 		int minute = value.get(Calendar.MINUTE);
 		int second = value.get(Calendar.SECOND);
 		int millisecond = value.get(Calendar.MILLISECOND);
+		value.setTimeZone(origTimeZone);
 				
 		int digit = year / 1000;
 		V_bytes[0] = (byte)(48 + digit);

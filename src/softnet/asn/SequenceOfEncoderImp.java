@@ -17,7 +17,6 @@
 package softnet.asn;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 class SequenceOfEncoderImp implements SequenceOfEncoder, ElementEncoder
 {
@@ -147,11 +146,17 @@ class SequenceOfEncoderImp implements SequenceOfEncoder, ElementEncoder
 		childNodes.add(PrintableStringEncoder.create(value));	
 	}
 
+	public void GndTime(java.util.Date value)
+	{
+		validateStateAndValue(UType.GeneralizedTime, value);
+		DateToGndTimeEncoder encoder = DateToGndTimeEncoder.create(value);
+		childNodes.add(encoder);
+	}
+	
 	public void GndTime(java.util.GregorianCalendar value) 
 	{
 		validateStateAndValue(UType.GeneralizedTime, value);
-		GregorianCalendar valueClone = (GregorianCalendar)value.clone();
-		GndTimeGCEncoder encoder = GndTimeGCEncoder.create(valueClone);
+		GCToGndTimeEncoder encoder = GCToGndTimeEncoder.create(value);
 		childNodes.add(encoder);
 	}
 

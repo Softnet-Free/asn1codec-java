@@ -41,13 +41,13 @@ public class ASNEncoder
       	return binStack.buffer();
     }
 
-    public byte[] getEncoding(int prefixSize)
+    public byte[] getEncoding(int headerSize)
     {
-        if (prefixSize < 0)
-            throw new IllegalArgumentException("'prefixSize' must not be negative.");
+        if (headerSize < 0 || headerSize > 1024)
+            throw new IllegalArgumentException("'headerSize' must be in the range between 0 and 1024 inclusive.");
         int estimatedSize = sequence.estimateSize();
         BinaryStack binStack = new BinaryStack();
-        binStack.allocate(prefixSize + estimatedSize);
+        binStack.allocate(headerSize + estimatedSize);
         sequence.encodeTLV(binStack);
        	return binStack.buffer();
     }	

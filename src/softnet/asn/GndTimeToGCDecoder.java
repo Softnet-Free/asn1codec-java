@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-class GndTimeGCDecoder
+class GndTimeToGCDecoder
 {
 	public static GregorianCalendar decode(byte[] buffer, int offset, int V_length) throws FormatAsnException
 	{
@@ -158,7 +158,6 @@ class GndTimeGCDecoder
 		value.set(Calendar.MINUTE, minute);
 		value.set(Calendar.SECOND, second);
 		value.set(Calendar.MILLISECOND, millisecond);
-		value.get(Calendar.YEAR);
 		value.setTimeZone(TimeZone.getDefault());
 		
 		return value;

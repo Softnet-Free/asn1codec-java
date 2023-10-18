@@ -66,6 +66,10 @@ public interface TexpEncoder {
 	void PrintableString(int tag, String value);
 	void PrintableString(int tag, String value, TagClass tc);
 
+	void GndTime(java.util.Date value);
+	void GndTime(int tag, java.util.Date value);
+	void GndTime(int tag, java.util.Date value, TagClass tc);
+
 	void GndTime(java.util.GregorianCalendar value);
 	void GndTime(int tag, java.util.GregorianCalendar value);
 	void GndTime(int tag, java.util.GregorianCalendar value, TagClass tc);

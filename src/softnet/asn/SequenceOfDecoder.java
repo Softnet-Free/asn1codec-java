@@ -42,6 +42,7 @@ public interface SequenceOfDecoder {
     String IA5String(int requiredLength) throws AsnException;
     String IA5String(int minLength, int maxLength) throws AsnException;
     String PrintableString() throws AsnException;
+    java.util.Date GndTimeToDate() throws AsnException;
     java.util.GregorianCalendar GndTimeToGC() throws AsnException;
     byte[] OctetString() throws AsnException;
     byte[] OctetString(int requiredLength) throws AsnException;

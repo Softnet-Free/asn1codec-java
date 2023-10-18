@@ -1028,6 +1028,78 @@ class TexpDecoderImp implements  TexpDecoder {
         return value;
     }
 
+    public java.util.Date GndTimeToDate() throws FormatAsnException, EndOfContainerAsnException, TypeMismatchAsnException
+    {
+    	validateState();
+
+        int T = m_buffer[m_offset];
+        int tagClass = T & C_Mask_Class;
+        
+        if(_validateClass && tagClass != C_Universal_Class)
+            throw new TypeMismatchAsnException();
+
+        if ((T & C_Constructed_Flag) != 0)
+            throw new TypeMismatchAsnException();
+
+        if (tagClass == C_Universal_Class)
+        {
+            if ((T & C_Mask_Tag) != UniversalTag.GeneralizedTime)
+                throw new TypeMismatchAsnException();
+
+            int V_Length = decodeLength();
+            java.util.Date value = GndTimeToDateDecoder.decode(m_buffer, m_offset, V_Length);
+            m_offset += V_Length;
+
+            if (m_offset != data_end)
+                throw new FormatAsnException();
+
+            return value;
+        }
+        else
+        {
+            int V_Length = decodeLength();
+            java.util.Date value = GndTimeToDateDecoder.decode(m_buffer, m_offset, V_Length);
+            m_offset += V_Length;
+
+            if (m_offset != data_end)
+                throw new FormatAsnException();
+
+            return value;
+        }
+    }
+    
+    public java.util.Date GndTimeToDate(TagClass tc) throws FormatAsnException, EndOfContainerAsnException, TypeMismatchAsnException
+    {
+    	validateState();
+
+    	if(tc == null)
+    		throwExceptionOnTagClassNull();
+
+        int T = m_buffer[m_offset];
+        int tagClass = T & C_Mask_Class;
+        
+        if(tc == TagClass.Application && tagClass != C_Application_Class)
+            throw new TypeMismatchAsnException();
+
+        if(tc == TagClass.ContextSpecific && tagClass != C_ContextSpecific_Class)
+            throw new TypeMismatchAsnException();
+
+        if(tc == TagClass.Private && tagClass != C_Private_Class)
+            throw new TypeMismatchAsnException();
+
+        if ((T & C_Constructed_Flag) != 0)
+            throw new TypeMismatchAsnException();
+
+        int V_Length = decodeLength();
+        java.util.Date value = GndTimeToDateDecoder.decode(m_buffer, m_offset, V_Length);
+        m_offset += V_Length;
+
+        if (m_offset != data_end)
+            throw new FormatAsnException();
+
+        return value;
+    }
+    
     public GregorianCalendar GndTimeToGC() throws FormatAsnException, EndOfContainerAsnException, TypeMismatchAsnException
     {
     	validateState();
@@ -1047,7 +1119,7 @@ class TexpDecoderImp implements  TexpDecoder {
                 throw new TypeMismatchAsnException();
 
             int V_Length = decodeLength();
-            GregorianCalendar value = GndTimeGCDecoder.decode(m_buffer, m_offset, V_Length); 
+            GregorianCalendar value = GndTimeToGCDecoder.decode(m_buffer, m_offset, V_Length); 
             m_offset += V_Length;
 
             if (m_offset != data_end)
@@ -1058,7 +1130,7 @@ class TexpDecoderImp implements  TexpDecoder {
         else
         {
             int V_Length = decodeLength();
-            GregorianCalendar value = GndTimeGCDecoder.decode(m_buffer, m_offset, V_Length); 
+            GregorianCalendar value = GndTimeToGCDecoder.decode(m_buffer, m_offset, V_Length); 
             m_offset += V_Length;
 
             if (m_offset != data_end)
@@ -1091,7 +1163,7 @@ class TexpDecoderImp implements  TexpDecoder {
             throw new TypeMismatchAsnException();
 
         int V_Length = decodeLength();
-        GregorianCalendar value = GndTimeGCDecoder.decode(m_buffer, m_offset, V_Length); 
+        GregorianCalendar value = GndTimeToGCDecoder.decode(m_buffer, m_offset, V_Length); 
         m_offset += V_Length;
 
         if (m_offset != data_end)

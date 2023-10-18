@@ -1,0 +1,140 @@
+/*
+*	Copyright 2023 Robert Koifman
+*
+*   Licensed under the Apache License, Version 2.0 (the "License");
+*   you may not use this file except in compliance with the License.
+*   You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*/
+
+package softnet.asn;
+
+import java.util.Calendar;
+import java.util.TimeZone;
+
+class DateToGndTimeEncoder implements ElementEncoder{
+	private byte[] V_bytes;
+	private int V_length;
+	
+	private DateToGndTimeEncoder() {
+		V_bytes = new byte[19];
+    	V_length = 0;
+	}
+
+	public static DateToGndTimeEncoder create(java.util.Date value)
+    {
+		DateToGndTimeEncoder encoder = new DateToGndTimeEncoder();
+        encoder.encodeV(value);
+        return encoder;
+    }
+
+    public boolean isConstructed() {
+    	return false;
+    }
+
+    public int estimateSize() {
+    	return 2 + V_length;
+    }
+
+	public int encodeTLV(BinaryStack binStack)
+	{
+		binStack.stack(V_bytes, 0, V_length);
+    	binStack.stack((byte)V_length);    	
+        binStack.stack(UniversalTag.GeneralizedTime);
+        return 2 + V_length;
+	}
+	
+	public int encodeLV(BinaryStack binStack)
+	{
+		binStack.stack(V_bytes, 0, V_length);
+    	binStack.stack((byte)V_length);    	
+        return 1 + V_length;
+	}
+	
+	private void encodeV(java.util.Date value)
+	{
+		Calendar calendar = Calendar.getInstance();
+		TimeZone utcTimeZone = TimeZone.getTimeZone("UTC");
+        calendar.setTimeZone(utcTimeZone);
+        
+        calendar.setTime(value);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+		int millisecond = calendar.get(Calendar.MILLISECOND);
+
+		int digit = year / 1000;
+		V_bytes[0] = (byte)(48 + digit);
+		year = year - digit * 1000;
+		digit = year / 100;
+		V_bytes[1] = (byte)(48 + digit);
+		year = year - digit * 100;
+		digit = year / 10;
+		V_bytes[2] = (byte)(48 + digit);
+		digit = year % 10;
+		V_bytes[3] = (byte)(48 + digit);
+		
+		digit = month + 1;
+		V_bytes[4] = (byte)(48 + digit / 10);
+		V_bytes[5] = (byte)(48 + digit % 10);
+		
+		V_bytes[6] = (byte)(48 + day / 10);
+		V_bytes[7] = (byte)(48 + day % 10);
+
+		V_bytes[8] = (byte)(48 + hour / 10);
+		V_bytes[9] = (byte)(48 + hour % 10);
+
+		V_bytes[10] = (byte)(48 + minute / 10);
+		V_bytes[11] = (byte)(48 + minute % 10);
+
+		V_bytes[12] = (byte)(48 + second / 10);
+		V_bytes[13] = (byte)(48 + second % 10);
+
+		int offset = 14;
+		if(millisecond > 0)
+		{
+			int d1 = millisecond / 100;
+			millisecond = millisecond - d1 * 100;
+			int d2 = millisecond / 10;
+			int d3 = millisecond % 10;
+
+			V_bytes[offset] = '.';
+			offset++;
+			
+			if(d3 != 0)
+			{
+				V_bytes[offset] = (byte)(48 + d1);
+				offset++;
+				V_bytes[offset] = (byte)(48 + d2);
+				offset++;
+				V_bytes[offset] = (byte)(48 + d3);
+				offset++;
+			}
+			else if(d2 != 0)
+			{
+				V_bytes[offset] = (byte)(48 + d1);
+				offset++;
+				V_bytes[offset] = (byte)(48 + d2);
+				offset++;				
+			}
+			else
+			{
+				V_bytes[offset] = (byte)(48 + d1);
+				offset++;				
+			}
+		}
+		
+		V_bytes[offset] = 'Z';
+		V_length = offset + 1;		
+	}
+}

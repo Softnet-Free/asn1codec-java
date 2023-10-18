@@ -17,7 +17,6 @@
 package softnet.asn;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 class SequenceEncoderImp implements SequenceEncoder, ElementEncoder
 {
@@ -144,11 +143,19 @@ class SequenceEncoderImp implements SequenceEncoder, ElementEncoder
 		childNodes.add(PrintableStringEncoder.create(value));	
 	}
 
+	public void GndTime(java.util.Date value)
+	{
+		if(value == null)
+			throw new NullPointerException("The parameter 'value' must not be null.");		
+		DateToGndTimeEncoder encoder = DateToGndTimeEncoder.create(value);
+		childNodes.add(encoder);
+	}
+	
 	public void GndTime(java.util.GregorianCalendar value) 
 	{
 		if(value == null)
 			throw new NullPointerException("The parameter 'value' must not be null.");		
-		GndTimeGCEncoder encoder = GndTimeGCEncoder.create((GregorianCalendar)value.clone());
+		GCToGndTimeEncoder encoder = GCToGndTimeEncoder.create(value);
 		childNodes.add(encoder);
 	}
 
@@ -346,19 +353,31 @@ class SequenceEncoderImp implements SequenceEncoder, ElementEncoder
 		childNodes.add(new TimpEncoder(tag, tc, encoder));
 	}		
 
+	public void GndTime(int tag, java.util.Date value)
+	{
+		validateValue(value);
+		DateToGndTimeEncoder encoder = DateToGndTimeEncoder.create(value);
+		childNodes.add(new TimpEncoder(tag, encoder));
+	}
+
+	public void GndTime(int tag, java.util.Date value, TagClass tc)
+	{
+		validateValue(value);
+		DateToGndTimeEncoder encoder = DateToGndTimeEncoder.create(value);
+		childNodes.add(new TimpEncoder(tag, tc, encoder));
+	}
+
 	public void GndTime(int tag, java.util.GregorianCalendar value)
 	{
 		validateValue(value);
-		GregorianCalendar valueClone = (GregorianCalendar)value.clone();
-		GndTimeGCEncoder encoder = GndTimeGCEncoder.create(valueClone);
+		GCToGndTimeEncoder encoder = GCToGndTimeEncoder.create(value);
 		childNodes.add(new TimpEncoder(tag, encoder));
 	}
 
 	public void GndTime(int tag, java.util.GregorianCalendar value, TagClass tc)
 	{
 		validateValue(value);
-		GregorianCalendar valueClone = (GregorianCalendar)value.clone();
-		GndTimeGCEncoder encoder = GndTimeGCEncoder.create(valueClone);
+		GCToGndTimeEncoder encoder = GCToGndTimeEncoder.create(value);
 		childNodes.add(new TimpEncoder(tag, tc, encoder));
 	}
 
