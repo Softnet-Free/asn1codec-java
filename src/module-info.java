@@ -14,26 +14,20 @@
 *   limitations under the License.
 */
 
-package softnet.asn;
+/**
+ * @author Robert Koifman
+**/
 
-class NullEncoder implements ElementEncoder
-{
-	public int estimateSize() {
-		return 2;		
-	}
-	
-    public boolean isConstructed() {
-    	return false;
-    }
-
-	public int encodeTLV(BinaryStack binStack) {
-        binStack.stack((byte)0);
-        binStack.stack(UniversalTag.Null);
-        return 2;
-	}
-	
-	public int encodeLV(BinaryStack binStack) {
-        binStack.stack((byte)0);
-        return 1;
-	}
+/**
+ * The Softnet ASN.1 Codec (Java) utilizes data types and packages from Java SE 1.7.
+ * If your application is assumed to use the Java 1.7 or Java 1.8 runtime,
+ * you can also target this library to that runtime. In this case, to compile this library
+ * you need to comment out the following code. Otherwise, starting with Java 1.9,
+ * Java applications use Java Platform Module System (JMPS), and this code is required
+ * to declare module-related information and dependencies.
+**/
+/*
+module asncodec {
+	exports softnet.asn;	
 }
+*/

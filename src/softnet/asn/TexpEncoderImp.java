@@ -16,7 +16,7 @@
 
 package softnet.asn;
 
-public class TexpEncoderImp implements TexpEncoder, ElementEncoder
+class TexpEncoderImp implements TexpEncoder, ElementEncoder
 {
 	private static int C_ContextSpecific_Constructed = 0xA0;
 	private static int C_Application_Constructed = 0x60;
